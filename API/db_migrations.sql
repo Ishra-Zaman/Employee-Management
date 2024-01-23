@@ -1,0 +1,23 @@
+CREATE DATABASE IF NOT EXISTS `emloyees`;
+
+CREATE TABLE designation (
+    id uuid PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    status VARCHAR(10) NOT NULL DEFAULT 'active',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE employee (
+    id uuid PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email_address VARCHAR(100) NOT NULL,
+    phone VARCHAR(15) NULL,
+    address VARCHAR(255) NULL,
+    salary DECIMAL(15, 2) NOT NULL,
+    designation_id uuid REFERENCES designation(id),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
