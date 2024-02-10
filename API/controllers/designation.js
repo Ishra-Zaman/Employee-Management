@@ -1,6 +1,7 @@
 const { v4: uuidv4 } = require("uuid");
 const { Pool } = require("pg");
 const dotenv = require("dotenv");
+const {isErrorAForeignKeyViolation} = require("../utils/utils")
 
 dotenv.config();
 
@@ -104,6 +105,9 @@ const deleteDesignation = async (req, res) => {
     res.json({ message: "Designation deleted successfully" });
   } catch (err) {
     console.error(`Error: ${err.message}`);
+    const isForeignKeyViolation = isErrorAForeignKeyViolation(err.message);
+    let message = isForeignKeyViolation ? "Unable to delete designation since it's already tide up with employee(s)" : err.message;
+    res.status(500).json({message: message}) //@TODO: have to add this to all API functions so we can see error message back.
   }
 };
 
@@ -114,3 +118,5 @@ module.exports = {
   updateDesignation,
   deleteDesignation,
 };
+
+// Test
