@@ -12,9 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(`${BASE_API_URL}/api/designations`)
         .then(response => response.json())
         .then(designations => {
-            designations.forEach(designation => {
-                designationContainer.innerHTML += createDesignationCard(designation);
-            });
+            if(designations.length === 0) {
+                designationContainer.innerHTML = displayLoadingIndicator();
+            } else {
+                designations.forEach(designation => {
+                    designationContainer.innerHTML += createDesignationCard(designation);
+                });
+            }            
+        }).catch((err) => {
+            console.log('Error: ', err.message)
+            if(err.message) {
+                designationContainer.innerHTML = displayLoadingIndicator();
+            }
         });
 });
 
@@ -25,6 +34,16 @@ function createDesignationCard(designation) {
             <p>${designation.description || 'No description available'}</p>
         </div>
     `;
+}
+
+function displayLoadingIndicator() {
+    return `
+        <div class="d-flex justify-content-center w-100">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    `
 }
 
 function goBack() {

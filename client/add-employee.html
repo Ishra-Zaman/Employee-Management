@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <title>Add Employee</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="text-center">Add Employee</h1>
+    </div>
+
+    <div class="container mt-4 mb-4">
+      <form id="designation-form">
+        <div class="mb-3">
+          <label for="first_name" class="form-label">First Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="first_name"
+            placeholder="Enter the first name"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="last_name" class="form-label">Last Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="last_name"
+            placeholder="Enter the last name"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="email_address" class="form-label">Email Address:</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email_address"
+            placeholder="Enter the email address"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone Number:</label>
+          <input
+            type="email"
+            class="form-control"
+            id="phone"
+            placeholder="Enter the phone number"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="address" class="form-label">Address:</label>
+          <textarea class="form-control" id="address"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="salary" class="form-label">Salary:</label>
+          <input
+            type="email"
+            class="form-control"
+            id="salary"
+            placeholder="Enter the salary"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="designation_id" class="form-label">Designations:</label>
+          <select class="form-select" id="designation_id">
+            <option selected>--- Select Designation ---</option>
+          </select>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <button
+            type="button"
+            class="btn btn-success me-2"
+            id="employee-submit-button"
+            title="Click here to submit your employee!"
+          >
+            Submit
+          </button>
+
+          <div>
+            <a
+              href="designations.html"
+              class="btn btn-secondary"
+              title="Click here to go back to the designations page!"
+              >Go back</a
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script src="scripts/addEmployee.js"></script>
+  </body>
+</html>
