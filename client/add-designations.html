@@ -9,6 +9,7 @@
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="css/styles.css"/>
     <title>Add Designations</title>
   </head>
   <body>
@@ -29,7 +30,9 @@
           />
         </div>
         <div class="mb-3">
-          <label for="designation-description" class="form-label">Description:</label>
+          <label for="designation-description" class="form-label"
+            >Description:</label
+          >
           <textarea
             class="form-control"
             id="designation-description"
@@ -37,12 +40,12 @@
             rows="1"
           ></textarea>
         </div>
-    
+
         <div class="d-flex align-items-center">
           <button
             type="button"
             class="btn btn-success me-2"
-            id="designation"
+            id="designation-submit-button"
             title="Click here to submit your designation!"
           >
             Submit
@@ -59,9 +62,6 @@
         </div>
       </form>
     </div>
-
-    
-    
 
     <script src="scripts/addDesignations.js"></script>
   </body>

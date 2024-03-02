@@ -2,7 +2,11 @@ const BASE_API_URL = "http://localhost:8000";
 
 document.addEventListener("DOMContentLoaded", () => {
     const submitButton = document.getElementById("designation-submit-button");
-    submitButton.addEventListener("click", createDesignation);
+    if (submitButton) {
+        submitButton.addEventListener("click", createDesignation);
+    } else {
+        console.error("Submit button not found");
+    }
 });
 
 function createDesignation() {
