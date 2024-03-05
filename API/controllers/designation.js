@@ -15,7 +15,8 @@ const pool = new Pool({
 
 const getAllDesignations = async (req, res) => {
   try {
-    const designations = await pool.query("SELECT * FROM designation");
+    let query = "SELECT * FROM designation";
+    const designations = await pool.query("SELECT * FROM designation WHERE status = 'active' ORDER BY updated_at DESC");
     res.json(designations.rows);
   } catch (err) {
     console.error(`Error: ${err.message}`);
@@ -61,7 +62,7 @@ const createDesignation = async (req, res) => {
 const updateDesignation = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, status } = req.body;
+    const { name, description, status } = req.body;
 
     const designationExists = await pool.query("SELECT * FROM designation WHERE id = $1", [id]);
     if (designationExists.rows.length === 0) {
@@ -69,8 +70,8 @@ const updateDesignation = async (req, res) => {
     }
 
     const updatedDesignation = await pool.query(
-      "UPDATE designation SET name = $1, status = $2 WHERE id = $3 RETURNING *",
-      [name, status, id]
+      "UPDATE designation SET name = $1, description = $2, status = $3, updated_at = NOW() WHERE id = $4 RETURNING *",
+      [name, description, status, id]
     );
 
     res.json(updatedDesignation.rows[0]);
