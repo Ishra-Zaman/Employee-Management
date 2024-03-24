@@ -4,13 +4,26 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const pool = new Pool({
+let dbConnectObject = {
   user: process.env.PGUSER,
   host: process.env.PGHOST,
   database: process.env.PGDATABASE,
   password: process.env.PGPASSWORD,
   port: process.env.PGPORT,
-});
+}
+if(process.env.NODE_ENV === "production") {
+  dbConnectObject = {
+    user: process.env.PGUSER_PROD,
+    host: process.env.PGHOST_PROD,
+    database: process.env.PGDATABASE_PROD,
+    password: process.env.PGPASSWORD_PROD,
+    port: process.env.PGPORT_PROD,
+    ssl: process.env.PGSSL_PROD
+  }
+}
+
+
+const pool = new Pool(dbConnectObject);
 
 const getAllEmployees = async (req, res) => {
     try {

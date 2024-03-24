@@ -27,6 +27,7 @@ const connectDB = async () => {
     await client.connect();
 
     console.log("Connected to database");
+    console.log('Client Host', client.host);
     
     await client.end();
 
