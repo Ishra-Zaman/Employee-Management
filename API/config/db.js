@@ -5,13 +5,23 @@ dotenv.config();
 
 const connectDB = async () => {
   try {
-    const client = new Client({
+    let dbConnectObject = {
       user: process.env.PGUSER,
       host: process.env.PGHOST,
       database: process.env.PGDATABASE,
       password: process.env.PGPASSWORD,
       port: process.env.PGPORT,
-    });
+    }
+    if(process.env.NODE_ENV === "production") {
+      dbConnectObject = {
+        user: process.env.PGUSER_PROD,
+        host: process.env.PGHOST_PROD,
+        database: process.env.PGDATABASE_PROD,
+        password: process.env.PGPASSWORD_PROD,
+        port: process.env.PGPORT_PROD,
+      }
+    }
+    const client = new Client(dbConnectObject);
 
     await client.connect();
 
