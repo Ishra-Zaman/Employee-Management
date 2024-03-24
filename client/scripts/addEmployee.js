@@ -1,4 +1,7 @@
-const BASE_API_URL = "http://localhost:8000";
+let BASE_API_URL = "http://localhost:8000";
+if(window.location.host !== "127.0.0.1:5500" || window.location.host !== "localhost") {
+    BASE_API_URL = "https://employee-management-5rk2.onrender.com"
+}
 const DESIGNATIONS_API_URL = `${BASE_API_URL}/api/designations`
 const EMPLOYEE_API_URL = `${BASE_API_URL}/api/employees`
 
