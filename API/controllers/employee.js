@@ -18,7 +18,7 @@ const getAllEmployees = async (req, res) => {
       FROM employee as e
       LEFT JOIN designation as d
       ON d.id = e.designation_id
-      ORDER BY e.created_at desc;`);
+      ORDER BY e.updated_at desc;`);
   
       res.json(employees.rows);
     } catch (err) {
@@ -69,23 +69,18 @@ const getAllEmployees = async (req, res) => {
     }
   };
 
-  const updateEmployee = async (req, res) => {
+ const updateEmployee = async (req, res) => {
     try {
       const { id } = req.params;
-      const { first_name, last_name } = req.body;
-  
-      // if (!last_name) {
-      //   return res.status(400).json({ message: "Last name is required" });
-      // }
-  
+      const { first_name, last_name, address, email_address, phone, salary, designation_id } = req.body;  
       const employeeExists = await pool.query("SELECT * FROM employee WHERE id = $1", [id]);
       if (employeeExists.rows.length === 0) {
         return res.status(404).json({ message: "Employee not found" });
       }
   
       const updatedEmployee = await pool.query(
-        "UPDATE employee SET first_name = $1, last_name = $2 WHERE id = $3 RETURNING *",
-        [first_name, last_name, id]
+        "UPDATE employee SET first_name = $1, last_name = $2, address = $3, email_address = $4, phone = $5, salary = $6, designation_id = $7, updated_at = NOW() WHERE id = $8 RETURNING *",
+        [first_name, last_name, address, email_address, phone, salary, designation_id, id]
       );
   
       res.json(updatedEmployee.rows[0]);
@@ -93,7 +88,8 @@ const getAllEmployees = async (req, res) => {
       console.error(`Error: ${err.message}`);
       res.status(500).json({ message: "Internal Server Error" });
     }
-  };  
+};
+
   
   const deleteEmployee = async (req, res) => {
     try {

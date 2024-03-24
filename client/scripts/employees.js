@@ -30,8 +30,8 @@ function createEmployeeCard(employee) {
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Address: ${employee.address || 'No address available'}</li>
-                <li class="list-group-item">Phone: ${employee.phone || 'No phone number available'}</li>
-                <li class="list-group-item">Email: ${employee.email_address}</li>
+                <li class="list-group-item">Email Address: ${employee.email_address}</li>
+                <li class="list-group-item">Phone Number: ${employee.phone || 'No phone number available'}</li>
                 <li class="list-group-item">Salary: ${employee.salary}</li>
                 <li class="list-group-item">Designation: ${employee.designation_name}</li>
             </ul>
@@ -68,10 +68,6 @@ function deleteEmployee(employeeId) {
     });
 }
 
-function saveEmployee(employeeId) {
-    const employeeCard = document.querySelector(`.card[data-id="${employeeIdId}"]`);
-    if (employeeCard) {
-    }
-}
+
 
 

@@ -2,6 +2,7 @@ const BASE_API_URL = "http://localhost:8000";
 
 document.addEventListener("DOMContentLoaded", () => {
     const designationContainer = document.getElementById("designation-list");
+    const searchInput = document.querySelector('.form-control');
 
     fetch(`${BASE_API_URL}/api/designations`)
         .then(response => response.json())
@@ -9,9 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if(designations.length === 0) {
                 designationContainer.innerHTML = displayLoadingIndicator();
             } else {
-                designations.forEach(designation => {
-                    designationContainer.innerHTML += createDesignationCard(designation);
-                });
+                displayDesignations(designations);
             }            
         })
         .catch((err) => {
@@ -21,12 +20,37 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+    searchInput.addEventListener('input', (event) => {
+        const searchQuery = event.target.value.trim().toLowerCase();
+        fetch(`${BASE_API_URL}/api/designations`)
+            .then(response => response.json())
+            .then(designations => {
+                const filteredDesignations = designations.filter(designation => {
+                    return designation.name.toLowerCase().includes(searchQuery);
+                });
+                displayDesignations(filteredDesignations);
+            })
+            .catch((err) => {
+                console.log('Error: ', err.message)
+            });
+    });
+});
+
+function displayDesignations(designations) {
+    const designationContainer = document.getElementById("designation-list");
+    designationContainer.innerHTML = ""; 
+    designations.forEach(designation => {
+        designationContainer.innerHTML += createDesignationCard(designation);
+    });
+}
+
 function createDesignationCard(designation) {
     return `
         <div class="card" data-id="${designation.id}">
             <div class="card-body">
                 <h3>${designation.name}</h3>
                 <p>${designation.description || 'No description available'}</p>
+                <p>${designation.status}</p>
             </div>
             <div style="position: absolute; top: 10px; right: 10px;">
                 <a href="edit-designation.html?id=${designation.id}" class="btn btn-primary btn-sm"><i class="fas fa-pencil"></i></a>
@@ -46,7 +70,6 @@ function createDesignationCard(designation) {
             }
         }
     });
-});
 
 function deleteDesignation(designationId) {
     fetch(`${BASE_API_URL}/api/designations/${designationId}`, {
@@ -60,11 +83,7 @@ function deleteDesignation(designationId) {
     });
 }
 
-function saveDesignation(designationId) {
-    const designationCard = document.querySelector(`.card[data-id="${designationId}"]`);
-    if (designationCard) {
-    }
-}
+
 
             
 

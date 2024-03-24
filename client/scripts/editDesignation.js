@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function updateDesignation() {
     const name = document.getElementById("designation-name").value;
     const description = document.getElementById("designation-description").value;
-    const status = document.getElementById('designation-status').value;
+    const status = document.getElementById("designation-status").value;
 
     const updateDesignation = {
         name: name,
