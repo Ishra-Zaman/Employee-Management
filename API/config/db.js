@@ -19,6 +19,7 @@ const connectDB = async () => {
         database: process.env.PGDATABASE_PROD,
         password: process.env.PGPASSWORD_PROD,
         port: process.env.PGPORT_PROD,
+        ssl: process.env.PGSSL_PROD
       }
     }
     const client = new Client(dbConnectObject);
