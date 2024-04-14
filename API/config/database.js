@@ -24,6 +24,12 @@ if (process.env.NODE_ENV === "production") {
     {
       host: DB_HOST_PROD,
       dialect: DB_DIALECT_PROD,
+      dialectOptions: {
+        ssl: {
+          require: DB_SSL_PROD,
+          rejectUnauthorized: false
+        }
+      },
       pool: {
         max: 5,
         min: 0,
