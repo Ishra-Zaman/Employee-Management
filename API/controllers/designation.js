@@ -110,7 +110,7 @@ const deleteDesignation = async (req, res) => {
     const isForeignKeyViolation = isErrorAForeignKeyViolation(err.message);
     const message = isForeignKeyViolation
       ? "Unable to delete designation since it's already tied up with employee(s)"
-      : "Unable to delete the designaiton";
+      : "Unable to delete the designation";
     res.status(500).json({ message });
   }
 };
