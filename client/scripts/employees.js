@@ -36,7 +36,7 @@ function createEmployeeCard(employee) {
                 <li class="list-group-item">Email Address: ${employee.email_address}</li>
                 <li class="list-group-item">Phone Number: ${employee.phone || 'No phone number available'}</li>
                 <li class="list-group-item">Salary: ${employee.salary}</li>
-                <li class="list-group-item">Designation: ${employee.designation_name}</li>
+                <li class="list-group-item">Designation: ${employee.designation_id}</li>
             </ul>
             <div class="card-body">
             <a href="edit-employee.html?id=${employee.id}" class="btn btn-primary btn-sm"><i class="fas fa-pencil"></i></a>

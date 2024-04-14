@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../config/database');
 const { v4: uuidv4 } = require("uuid");
+const Designation = require("../models/designation");
 
 const Employee = db.define("employee", {
     id: {
@@ -72,6 +73,11 @@ const Employee = db.define("employee", {
     }
 }, {timestamps: false, underscored: true, tableName: 'employee'})
 
+
 Employee.beforeCreate((emp) => emp.id = uuidv4());
+
+// Employee.associate = (models) => {
+//     Employee.belongsTo(models.id, {foreignKey: 'designation_id', as: 'Designation'});
+// };
 
 module.exports = Employee;

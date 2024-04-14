@@ -9,6 +9,11 @@ const {
 const getAllEmployees = async (req, res) => {
   try {
     const employees = await Employee.findAll({
+      include: [{
+        model: Designation,
+        required: false,
+  
+      }],
       order: [["updated_at", "DESC"]],
     });
     res.status(200).json(employees);
